@@ -6,5 +6,7 @@
     <string name="title_section1">Hello World Demo</string>
     <string name="title_section2">Converter</string>
     <string name="title_section3">Receiver</string>
+    <string name="et_message">.... . .-.. .-.. --- \/ .-- --- .-. .-.. -..</string>
+    <string name="btn_message2morse">Convert &amp; Play</string>
 
 </resources>

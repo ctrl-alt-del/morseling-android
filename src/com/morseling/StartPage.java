@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class StartPage extends FragmentActivity implements
@@ -27,6 +28,9 @@ ActionBar.OnNavigationListener, OnClickListener {
 	 * current dropdown position.
 	 */
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+	
+	private Button beep;
+	private EditText message;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +52,8 @@ ActionBar.OnNavigationListener, OnClickListener {
 					getString(R.string.title_section2),
 					getString(R.string.title_section3), }), this);
 
-		Button beep = (Button) this.findViewById(R.id.beep);
-
-		beep.setText("Play 'Hello World' Morse Code");
+		this.beep = (Button) this.findViewById(R.id.beep);
+		this.message = (EditText) this.findViewById(R.id.message);
 		
 		beep.setOnClickListener(this);
 	}
@@ -126,8 +129,9 @@ ActionBar.OnNavigationListener, OnClickListener {
 					R.layout.fragment_start_page_dummy, container, false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+//			dummyTextView.setText(Integer.toString(getArguments().getInt(
+//					ARG_SECTION_NUMBER)));
+			dummyTextView.setText("");
 			return rootView;
 		}
 	}
@@ -140,9 +144,10 @@ ActionBar.OnNavigationListener, OnClickListener {
 		case R.id.beep:
 			Ringtone r = null;
 			MorseCodeConverter mc = null;
+			
 			try {
 				mc = new MorseCodeConverter(this);
-				mc.beepString(".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+				mc.beepString(this.message.getText().toString());
 				
 				java.lang.Thread.sleep(1000);
 
