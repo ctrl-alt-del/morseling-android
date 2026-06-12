@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Morseling</string>
+    <string name="app_subtitle">将文本转换为摩尔斯电码</string>
+
+    <string name="title_history">历史记录</string>
+    <string name="title_settings">设置</string>
+    <string name="section_playback">播放</string>
+    <string name="section_about">关于</string>
+    <string name="section_text">文本</string>
+    <string name="section_morse">摩尔斯电码</string>
+
+    <string name="hint_type_text">输入任意文本</string>
+    <string name="hint_type_morse">输入摩尔斯电码 (. - /)</string>
+    <string name="placeholder_morse">.... . .-.. .-.. --- / .-- --- .-. .-.. -..</string>
+
+    <string name="action_convert">转换</string>
+    <string name="action_play">播放</string>
+    <string name="action_stop">停止</string>
+    <string name="action_back">返回</string>
+    <string name="action_clear_all">全部清除</string>
+    <string name="action_delete">删除</string>
+    <string name="action_favorite">收藏</string>
+    <string name="action_clear">清除</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_history">历史</string>
+    <string name="action_settings">设置</string>
+
+    <string name="mode_audio">音频</string>
+    <string name="mode_flash">闪光</string>
+    <string name="label_wpm">%d WPM</string>
+
+    <string name="settings_language">语言</string>
+    <string name="settings_default_mode">默认模式</string>
+    <string name="settings_default_wpm">默认速度</string>
+    <string name="settings_version">版本</string>
+    <string name="settings_licenses">开源许可证</string>
+    <string name="lang_system_default">跟随系统</string>
+
+    <string name="msg_no_history">暂无历史记录</string>
+    <string name="dialog_clear_title">清除全部历史</string>
+    <string name="dialog_clear_message">确认移除所有转换历史？此操作无法撤销。</string>
+
+    <string name="error_empty_text">请输入要转换的文本</string>
+    <string name="error_no_convertible">没有可转换为摩尔斯电码的字符</string>
+    <string name="error_empty_morse">请输入摩尔斯电码</string>
+    <string name="error_invalid_morse">无效的摩尔斯电码字符。请使用：. - 空格 /</string>
+    <string name="error_playback_failed">播放失败</string>
+    <string name="error_unconvertible">部分字符无法转换</string>
+    <string name="content_desc_play">播放摩尔斯电码</string>
+    <string name="content_desc_stop">停止播放</string>
+</resources>
