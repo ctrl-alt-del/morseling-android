@@ -18,9 +18,13 @@ gen/
 build/
 */build/
 !gradle/wrapper/gradle-wrapper.jar
+gradle/gradle-daemon-jvm.properties
 
 # Local configuration file (sdk path, etc)
 local.properties
+
+# Kotlin
+.kotlin/
 
 # IDEs
 *.iml
@@ -33,6 +37,12 @@ local.properties
 *.swp
 *.swo
 *~
+
+# Logs
+*.log
+
+# Captures
+captures/
 
 # OS
 .DS_Store

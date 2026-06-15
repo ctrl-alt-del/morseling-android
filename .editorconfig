@@ -1,0 +1,11 @@
+[*.{kt,kts,xml}]
+indent_size = 4
+indent_style = space
+
+[*.{gradle,properties,md,yml}]
+indent_size = 2
+indent_style = space
+
+[*.java]
+indent_size = 4
+indent_style = space
