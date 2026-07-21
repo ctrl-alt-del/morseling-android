@@ -86,3 +86,14 @@ finally { if (playJob === coroutineContext[Job]) { _uiState.update { ... } } }
 - Private composables for reusable sub-components (e.g., `HighlightedMorseText`)
 - ViewModel constructor injection via `@Inject` + `@Named` qualifiers where needed
 - DataStore keys defined as `val KEY_X = stringPreferencesKey("x")` in companion object
+
+## Triggering Feature Development
+
+When the user describes a new feature (creates, builds, adds, wants a new screen,
+etc.), follow the spec-driven development workflow in `specs/SDD.md`. Read
+`MEMORY.md` before writing any spec to avoid repeating known bugs. The workflow:
+1. Generate mockups if needed (`canvas-design` + `theme-factory`)
+2. Co-author spec + plan (`doc-coauthoring`)
+3. Write test plan and tasks
+4. Implement one commit per task
+5. Write takeaways → promote to `MEMORY.md`

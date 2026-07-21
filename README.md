@@ -59,4 +59,4 @@ See [AGENTS.md](AGENTS.md) for detailed architecture docs and coding conventions
 
 ## License
 
-MIT
+[Apache License 2.0](LICENSE)
