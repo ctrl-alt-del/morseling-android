@@ -2,38 +2,78 @@ name: CI
 
 on:
   push:
-    branches: [master, main]
+    branches: [master, main, develop]
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: '21'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          api-level: 35
-
-      - name: Cache Gradle
+      - name: Cache Android SDK platform 37
         uses: actions/cache@v4
+        id: android-sdk-cache
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ hashFiles('**/*.gradle*', 'gradle/libs.versions.toml', 'gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: gradle-
+          path: ${{ env.ANDROID_SDK_ROOT }}/platforms/android-37.0
+          key: android-sdk-37-${{ runner.os }}-v4
 
-      - name: Build
-        run: ./gradlew assembleDebug --no-daemon
+      - name: Install Android platform 37
+        if: steps.android-sdk-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "::group::Downloading Android platform 37 (~60 MB)"
+          wget -q --show-progress \
+            "https://raw.githubusercontent.com/ctrl-alt-del/sftping/ci-assets/android-platform-37.tar.gz" \
+            -O /tmp/platform-37.tar.gz
+          echo "::endgroup::"
+
+          echo "::group::Extracting platform"
+          mkdir -p "$ANDROID_SDK_ROOT/platforms"
+          tar -xzf /tmp/platform-37.tar.gz -C "$ANDROID_SDK_ROOT/platforms" || true
+          rm /tmp/platform-37.tar.gz
+          echo "::endgroup::"
+
+      - name: Symlink android-37 for AGP
+        run: |
+          if [ -d "$ANDROID_SDK_ROOT/platforms/android-37.0" ] && [ ! -d "$ANDROID_SDK_ROOT/platforms/android-37" ]; then
+            ln -s "$ANDROID_SDK_ROOT/platforms/android-37.0" "$ANDROID_SDK_ROOT/platforms/android-37"
+          fi
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+
+      - name: Lint
+        run: ./gradlew lint
+
+      - name: Assemble debug
+        run: ./gradlew assembleDebug
 
       - name: Unit tests
-        run: ./gradlew test --no-daemon
+        run: ./gradlew test
+
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            app/build/reports/tests/
+            app/build/reports/lint-results*.html
+          retention-days: 7

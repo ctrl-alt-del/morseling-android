@@ -1,20 +1,20 @@
 [versions]
-agp = "8.7.3"
-kotlin = "2.0.21"
+agp = "9.2.1"
+kotlin = "2.2.10"
 composeBom = "2024.12.01"
 coreKtx = "1.15.0"
 appcompat = "1.7.0"
 activityCompose = "1.9.3"
 lifecycle = "2.8.7"
 coroutines = "1.9.0"
-hilt = "2.51.1"
+hilt = "2.59.2"
 hiltNavigationCompose = "1.2.0"
-ksp = "2.0.21-1.0.28"
+ksp = "2.3.9"
 junit = "4.13.2"
 androidxTestJunit = "1.2.1"
 espresso = "3.6.1"
 tinypinyin = "2.0.3"
-room = "2.6.1"
+room = "2.7.1"
 navigationCompose = "2.8.5"
 robolectric = "4.13"
 datastore = "1.1.1"
@@ -60,7 +60,6 @@ datastore-preferences = { module = "androidx.datastore:datastore-preferences", v
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
