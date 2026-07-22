@@ -1,5 +1,5 @@
 ---
-last_updated: "2026-07-21"
+last_updated: "2026-07-22"
 ---
 
 # Feature Index
@@ -13,5 +13,6 @@ last_updated: "2026-07-21"
 | 005 | settings | ✅ Done | SettingsProvider.kt, SettingsRepository.kt, AppSettings.kt, SettingsScreen.kt, SettingsViewModel.kt, MorseConverterViewModel.kt, MainActivity.kt, SettingsModule.kt | 001, 002 |
 | 006 | theme-and-navigation | ✅ Done | Color.kt, Shape.kt, Theme.kt, Type.kt, MorselingNavGraph.kt, LicensesScreen.kt, MainActivity.kt | 001, 002, 003, 004, 005 |
 | 007 | app-infrastructure | ✅ Done | MorselingApplication.kt, MainActivity.kt, PlayerModule.kt, DatabaseModule.kt, SettingsModule.kt, ConversionDatabase.kt, SettingsRepository.kt, MorseConverterViewModel.kt, AndroidManifest.xml, build.gradle.kts | 001, 002, 004, 005, 006 |
+| 008 | fast-ci-sdk37 | ✅ Done | ci.yml, app/build.gradle.kts, libs.versions.toml, settings.gradle.kts, build.gradle.kts | — |
 
 Status: 📋 Planned → 🚧 In Progress → ✅ Done → 📦 Archived
