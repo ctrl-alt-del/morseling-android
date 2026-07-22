@@ -52,6 +52,17 @@
 
 - _(None recorded — clean git history with 0 reverted commits. Add entries here as bugs are discovered and fixed.)_
 
+## 🔧 Build & CI
+
+- ⚡ **AGP 9.x requires Hilt 2.52+**: Hilt 2.51.1 fails with "Android BaseExtension not found" under AGP 9.x. Minimum Hilt version for AGP 9.x compatibility is 2.52+ (tested with 2.59.2). #build #hilt
+- ⚡ **AGP 9.x auto-applies Kotlin**: The `kotlin-android` plugin must NOT be explicitly applied when using AGP 9.x. AGP applies it internally, and a second explicit application causes "Cannot add extension with name 'kotlin', as there is an extension already registered". Remove `alias(libs.plugins.kotlin.android)` from both root and app build.gradle.kts. #build #agp
+- ⚡ **Room 2.6.x incompatible with KSP 2.3.x**: KSP 2.3.9 + Room 2.6.1 produces "unexpected jvm signature V" during annotation processing. Upgrade to Room 2.7.1+ when using KSP ≥2.3.x. #build #room
+- **Tinypinyin dependency only on Aliyun mirror**: `com.github.promeg:tinypinyin:2.0.3` was published to jcenter (now dead) and is NOT available on Maven Central or JitPack. The only surviving source is the Aliyun public mirror (`https://maven.aliyun.com/repository/public`). Do not remove this repository. #build #dependencies
+- **Configuration cache unstable with AGP 9.x + Gradle 9.5.x**: The `processDebugNavigationResources` task triggers serialization errors with configuration cache enabled. Keep `org.gradle.configuration-cache=true` commented out until fixed upstream. #build #gradle
+- **CI platform SDK caching pattern**: For Android SDK platforms not yet in Google's public repo, compress the platform directory (~60 MB) to a tar.gz, host on a `ci-assets` branch, and cache the extracted result using `actions/cache@v4`. On cache miss, download and extract; on cache hit, skip the download step entirely. Reuse the same archive across repos under the same org to avoid duplication. #ci #sdk
+- **CI uses runner's pre-installed SDK**: Set `ANDROID_SDK_ROOT: /usr/local/lib/android/sdk` to use GitHub's pre-installed Android SDK (platforms 34-35, build-tools, cmdline-tools). Avoids the 2-3 minute penalty of `android-actions/setup-android@v3`. #ci
+- **CI Gradle caching**: Use `gradle/actions/setup-gradle@v4` instead of generic `actions/cache@v4` for Gradle. It intelligently caches wrapper, dependency jars, and build outputs. Set `cache-read-only: true` on fork PRs to prevent cache poisoning. #ci
+
 ## 🧠 AI Workflow Rule
 
 Before writing any spec, read in order:
